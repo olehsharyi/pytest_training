@@ -15,3 +15,8 @@ class User(BaseModel):
             return email
         else:
             raise ValueError(UserErrors.not_valid_email.value)
+
+
+class UserPost(BaseModel):
+    name: str
+    job: str

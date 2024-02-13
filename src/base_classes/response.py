@@ -5,7 +5,7 @@ class Response:
 
     def __init__(self, response):
         self.response = response
-        self.response_json = response.json().get('data')
+        self.response_json = response.json().get('data') if 'data' in response.json() else response.json()
         self.response_status = response.status_code
 
     def validate(self, schema):
@@ -21,6 +21,13 @@ class Response:
         else:
             assert self.response_status == status_code, self
         return self
+
+    def assert_data(self, data, expected):
+        if isinstance(self.response_json, list):
+            for item in self.response_json:
+                assert item[data] == expected
+        else:
+            assert self.response_json[data] == expected
 
     def __str__(self):
         return \
