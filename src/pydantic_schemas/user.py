@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field_validator, Field
+from pydantic import BaseModel, field_validator, Field, Extra
 from src.enums.user_enums import Genders, Statuses, UserErrors
 
 
@@ -19,4 +19,5 @@ class User(BaseModel):
 
 class UserPost(BaseModel):
     name: str
-    job: str
+    age: int
+
